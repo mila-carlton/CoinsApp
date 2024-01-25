@@ -20,6 +20,7 @@ class CoinViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubviews()
         autoLayout()
+        
     }
     
     required init?(coder: NSCoder) {
