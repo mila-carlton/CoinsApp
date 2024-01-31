@@ -8,6 +8,6 @@
 import Foundation
 
 struct Exchange: Decodable {
-    let name: String
+    let name: String?
 }
 

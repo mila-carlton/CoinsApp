@@ -25,11 +25,13 @@ final class MainTabBarController: UITabBarController {
         generateVC(viewController: CurrenciesViewController(), title: "Currencies", image: UIImage(systemName: "chart.bar.xaxis")!)
         ]
     }
-
-    private func generateVC(viewController: UIViewController, title: String, image: UIImage) -> UIViewController {
+    
+    private func generateVC(viewController: UIViewController, title: String, image: UIImage) -> UINavigationController {
+        
         viewController.tabBarItem.title = title
         viewController.tabBarItem.image = image
-        return viewController
+        let nav = UINavigationController(rootViewController: viewController)
+        return nav
     }
     
     private func configure() {

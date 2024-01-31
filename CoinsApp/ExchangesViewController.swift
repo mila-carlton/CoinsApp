@@ -9,56 +9,77 @@ import UIKit
 
 final class ExchangesViewController: UIViewController {
     
-    let tableView = UITableView()
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    
     var exchs: [Exchange] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         fetchExch()
-        setupTableView()
+        setupCollectionView()
        
         
     }
     
-    func setupTableView() {
-        view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+    private let webService = WebService()
+    
+    func setupCollectionView() {
+        navigationController?.navigationBar.barTintColor = .black
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        collectionView.backgroundColor = .black
+        title = "Exchanges"
+        view.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.rowHeight = 60
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.scrollDirection = .vertical
+        }
     }
     
     func fetchExch() {
-        NetworkManager.shared.fetchExchange(url: urlExch.absoluteString) {[unowned self] exchs in
+        
+        webService.fetchExchanges { [weak self] exchanges in
+            guard let self = self else { return }
             DispatchQueue.main.async {
-                self.exchs = exchs
-                self.tableView.reloadData()
+                self.exchs = exchanges ?? []
+                self.collectionView.reloadData()
             }
+            
         }
     }
 
 }
  
-extension ExchangesViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension ExchangesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         exchs.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         let exchange = exchs[indexPath.row]
-        cell.textLabel?.text = exchange.name
-        cell.backgroundColor = .gray
+        cell.contentView.subviews.forEach { $0.removeFromSuperview() }
+        let label = UILabel(frame: cell.bounds)
+        label.text = "  " + (exchange.name ?? "")
+        label.textAlignment = .left
+        label.textColor = .white
+        cell.contentView.addSubview(label)
+        cell.backgroundColor = UIColor(red: 34/255, green: 34/255, blue: 36/255, alpha: 1)
+        cell.layer.cornerRadius = 10
         return cell
     }
-    
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: (collectionView.bounds.width - 30), height: 40)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        10
+    }
 }

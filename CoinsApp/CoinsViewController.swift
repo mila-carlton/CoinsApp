@@ -13,13 +13,14 @@ class CoinsViewController: UIViewController {
 let tableView = UITableView()
     var coins: [Coin] = []
     
+    private let webService = WebService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Coins"
-        fetchCoins()
+        title = "Coins"
         setupTableView()
-        view.backgroundColor = .red
-        tableView.backgroundColor = .green
+        view.backgroundColor = UIColor(red: 237/255, green: 237/255, blue: 238/255, alpha: 1.0)
+        fetchCoins()
     }
     
     func setupTableView() {
@@ -31,17 +32,19 @@ let tableView = UITableView()
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        tableView.register(CoinViewCell.self, forCellReuseIdentifier: "CoinViewCell")
-        tableView.rowHeight = 80
+        tableView.register(CoinViewCell.self, forCellReuseIdentifier: CoinViewCell.identifier)
+        tableView.rowHeight = 60
+        tableView.backgroundColor = .clear
         tableView.dataSource = self
         tableView.delegate = self
     }
     
     private func fetchCoins() {
-        NetworkManager.shared.fetchCoins(url: url.absoluteString) { [unowned self] coins in
-            self.coins = coins
-            DispatchQueue.main.async { [unowned self] in
-                tableView.reloadData()
+        webService.fetchCoins { [weak self] coins  in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.coins = coins ?? []
+                self.tableView.reloadData()
             }
         }
     }
@@ -54,12 +57,17 @@ extension CoinsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CoinViewCell", for: indexPath) as? CoinViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CoinViewCell.identifier, for: indexPath) as? CoinViewCell else { return UITableViewCell() }
         let coin = coins[indexPath.row]
         cell.configure(coin: coin)
-        cell.backgroundColor = .yellow
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let marketVC = MarketViewController()
+//        marketVC.selectedIndexPath = indexPath
+        let navVC = UINavigationController(rootViewController: marketVC)
+        present(navVC, animated: true)
+    }
     
 }

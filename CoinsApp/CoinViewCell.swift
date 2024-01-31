@@ -8,7 +8,7 @@
 import UIKit
 
 class CoinViewCell: UITableViewCell {
-    static let identifier = "CoinViewCell"
+    static let identifier = "\(CoinViewCell.self)"
     
     var logoImage = UIImageView()
     let nameLabel = UILabel()
@@ -27,15 +27,35 @@ class CoinViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addSubviews() {
+    func configure(coin: Coin) {
+        nameLabel.text = coin.name ?? "iooeieo"
+        guard let icon = coin.icon else { return }
+        logoImage.loadImage(imageURL: icon)
+        abbreviationLabel.text = coin.symbol ?? ""
+        valueLabel.text = "$ " + (coin.price?.rounding() ?? "")
+        changeLabel.text = (coin.priceChange1d?.rounding() ?? "") + " %"
+        valueLabel.font = .systemFont(ofSize: 16, weight: .semibold)
+        nameLabel.font = .boldSystemFont(ofSize: 20)
+        
+        if coin.priceChange1d ?? 0 > 0 {
+            changeLabel.textColor = .green
+        } else {
+            changeLabel.textColor = .red
+        }
+    }
+        
+    private func addSubviews() {
+        backgroundColor = .white
+        layer.cornerRadius = 8
         contentView.addSubview(logoImage)
         contentView.addSubview(nameLabel)
         contentView.addSubview(abbreviationLabel)
         contentView.addSubview(valueLabel)
         contentView.addSubview(changeLabel)
+        
     }
     
-    func autoLayout() {
+    private func autoLayout() {
         [logoImage, nameLabel, abbreviationLabel, valueLabel, changeLabel].forEach { view in
             view.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -58,19 +78,7 @@ class CoinViewCell: UITableViewCell {
                 changeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)
             ])
         }
-        
-        func configure(coin: Coin) {
-            let cell = self.defaultContentConfiguration()
-            nameLabel.text = coin.name
-            abbreviationLabel.text = coin.symbol
-            valueLabel.text = "$ \(coin.price)"
-            changeLabel.text = "\(coin.priceChange1d)"
-            NetworkManager.shared.fetchImage(from: coin.icon) { data in
-                DispatchQueue.main.async { [unowned self] in
-                    logoImage.image = UIImage(data: data)
-                    self.contentConfiguration = cell
-                }
-            }
-            self.contentConfiguration = cell
-        }
     }
+
+
+
