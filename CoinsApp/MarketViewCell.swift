@@ -7,7 +7,9 @@
 
 import UIKit
 
-class MarketViewCell: UICollectionViewCell {
+class MarketCollectionViewCell: UICollectionViewCell {
+    
+    static let id = "\(MarketCollectionViewCell.self)"
     
     var titleLabel = UILabel()
     var priceLabel = UILabel()
@@ -24,28 +26,13 @@ class MarketViewCell: UICollectionViewCell {
     }
     
     private func setupViews() {
-        backgroundColor = .white
-        layer.cornerRadius = 8
+        backgroundColor = UIColor.cellColor //UIColor(red: 238/255, green: 236/255, blue: 240/255, alpha: 1)
+        layer.cornerRadius = 15
+        
         contentView.addSubview(titleLabel)
         contentView.addSubview(priceLabel)
         contentView.addSubview(marketLabel)
     }
-    
-    private func autoLayout() {
-        [titleLabel, priceLabel, marketLabel].forEach { view in
-            view.translatesAutoresizingMaskIntoConstraints = false
-        }
-            NSLayoutConstraint.activate([
-                titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
-                titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-                
-                priceLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-                priceLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-                
-                marketLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 15),
-                marketLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
-        ])
-}
     
     func configure(market: Market) {
         titleLabel.text = market.pair ?? ""
@@ -54,4 +41,22 @@ class MarketViewCell: UICollectionViewCell {
         
         titleLabel.font = .boldSystemFont(ofSize: 10)
     }
-            }
+    
+    
+    
+    private func autoLayout() {
+        [titleLabel, priceLabel, marketLabel].forEach { view in
+            view.translatesAutoresizingMaskIntoConstraints = false
+        }
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
+            titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            
+            priceLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            priceLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            
+            marketLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 15),
+            marketLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
+        ])
+    }
+}

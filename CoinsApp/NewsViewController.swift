@@ -7,12 +7,14 @@
 
 import UIKit
 
-class NewsViewController: UIViewController {
+final class NewsViewController: UIViewController {
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .purple
+       
     }
     
 

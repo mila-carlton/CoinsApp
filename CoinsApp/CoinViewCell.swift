@@ -15,6 +15,7 @@ class CoinViewCell: UITableViewCell {
     let abbreviationLabel = UILabel()
     let valueLabel = UILabel()
     let changeLabel = UILabel()
+    let backView = UIView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -45,37 +46,52 @@ class CoinViewCell: UITableViewCell {
     }
         
     private func addSubviews() {
-        backgroundColor = .white
-        layer.cornerRadius = 8
-        contentView.addSubview(logoImage)
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(abbreviationLabel)
-        contentView.addSubview(valueLabel)
-        contentView.addSubview(changeLabel)
+        backgroundColor = .clear
+        
+        backView.layer.cornerRadius = 8
+        
+        backView.backgroundColor = .cellColor
+        
+        contentView.addSubview(backView)
+        
+        backView.addSubview(logoImage)
+        backView.addSubview(nameLabel)
+        backView.addSubview(abbreviationLabel)
+        backView.addSubview(valueLabel)
+        backView.addSubview(changeLabel)
         
     }
     
     private func autoLayout() {
-        [logoImage, nameLabel, abbreviationLabel, valueLabel, changeLabel].forEach { view in
+        
+        // MARK: CELL ROW HEIGGHT BACKVIEW HEIGHT + TOP AND BOTTOM PADDING
+        
+        [logoImage, nameLabel, abbreviationLabel, valueLabel, changeLabel, backView].forEach { view in
             view.translatesAutoresizingMaskIntoConstraints = false
         }
             NSLayoutConstraint.activate([
-                logoImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-                logoImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+                logoImage.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 8),
+                logoImage.centerYAnchor.constraint(equalTo: backView.centerYAnchor),
                 logoImage.widthAnchor.constraint(equalToConstant: 32),
                 logoImage.heightAnchor.constraint(equalToConstant: 32),
                 
                 nameLabel.leadingAnchor.constraint(equalTo: logoImage.trailingAnchor, constant: 8),
-                nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+                nameLabel.topAnchor.constraint(equalTo: backView.topAnchor, constant: 8),
                 
                 abbreviationLabel.leadingAnchor.constraint(equalTo: logoImage.trailingAnchor, constant: 8),
-                abbreviationLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+                abbreviationLabel.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -8),
                 
-                valueLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-                valueLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+                valueLabel.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -8),
+                valueLabel.topAnchor.constraint(equalTo: backView.topAnchor, constant: 8),
                 
-                changeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-                changeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)
+                changeLabel.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -8),
+                changeLabel.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -8),
+                
+                backView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
+                backView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6),
+                backView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+                backView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)
+                
             ])
         }
     }

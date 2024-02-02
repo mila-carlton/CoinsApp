@@ -22,7 +22,7 @@ final class MainTabBarController: UITabBarController {
         generateVC(viewController: CoinsViewController(), title: "Coins", image: UIImage(systemName: "folder.fill")!),
         generateVC(viewController: ExchangesViewController(), title: "Exchanges", image: UIImage(systemName: "arrow.left.arrow.right.square")!),
         generateVC(viewController: NewsViewController(), title: "News", image: UIImage(systemName: "newspaper.fill")!),
-        generateVC(viewController: CurrenciesViewController(), title: "Currencies", image: UIImage(systemName: "chart.bar.xaxis")!)
+        generateVC(viewController: CurrencyViewController(), title: "Currencies", image: UIImage(systemName: "chart.bar.xaxis")!)
         ]
     }
     

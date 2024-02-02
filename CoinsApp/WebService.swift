@@ -26,7 +26,7 @@ final class WebService {
         
     }
     
-    func fetchExchanges(completion: @escaping ([Exchange]?)-> Void ) {
+    func fetchExchanges(completion: @escaping ([Exchange]?) -> Void ) {
         let url = URL(string: "https://openapiv1.coinstats.app/tickers/exchanges")!
     
         NetworkRequest.shared.requestAPI(type: [Exchange].self, url: url.absoluteString) { result in
@@ -54,4 +54,30 @@ final class WebService {
         }
     }
     
+    func fetchCurrency(completion: @escaping([Currency]?) -> Void ) {
+        let url = URL(string: "https://openapiv1.coinstats.app/fiats")!
+        
+        NetworkRequest.shared.requestAPI(type: [Currency].self, url: url.absoluteString) { result in
+            switch result {
+            case .success(let currencies):
+            completion(currencies)
+            case .failure(let error):
+                print(error)
+                completion(nil)
+            }
+        }
+    }
+    
+    func fetchNews(completion: @escaping(([NewArticle]?) -> Void)) {
+        let url = URL(string: "https://openapiv1.coinstats.app/news")!
+        NetworkRequest.shared.requestAPI(type: NewsResponse.self, url: url.absoluteString) { result in
+            switch result {
+            case .success(let news):
+                completion(news.result ?? [])
+            case .failure(let error):
+                print(error)
+                completion(nil)
+            }
+        }
+    }
 }
