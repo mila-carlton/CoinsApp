@@ -10,12 +10,13 @@ import UIKit
 final class NewsCollectionViewCell: UICollectionViewCell {
     static let id = "\(NewsCollectionViewCell.self)"
     
-    var sourceLabel = UILabel()
-    var image = UIImageView()
-    var titleLabel = UILabel()
+    private var sourceLabel = UILabel()
+    private var newsImageView = UIImageView()
+    private var titleLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        newsImageView.image = nil
         setupViews()
         autoLayout()
     }
@@ -24,36 +25,50 @@ final class NewsCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupViews() {
-        layer.cornerRadius = 10
-        
-        contentView.addSubview(sourceLabel)
-        contentView.addSubview(image)
-        contentView.addSubview(titleLabel)
-    }
-    
-    private func autoLayout() {
-        [sourceLabel, image, titleLabel].forEach { view in
-            view.translatesAutoresizingMaskIntoConstraints = false
-        }
-            NSLayoutConstraint.activate([
-                image.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-                image.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 5),
-                image.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-                
-                sourceLabel.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 5),
-                sourceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
-                
-                titleLabel.topAnchor.constraint(equalTo: sourceLabel.bottomAnchor, constant: 15),
-                titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5)
-        ])
-    }
-    
     func configure(news: NewArticle) {
         sourceLabel.text = news.source ?? ""
         titleLabel.text = news.title ?? ""
         
-        guard let imageView = news.imageUrl else { return }
-        image.loadImage(imageURL: imageView)
+        guard let imageView = news.imgUrl else { return }
+        newsImageView.loadImage(imageURL: imageView)
     }
+    
+    private func setupViews() {
+        layer.cornerRadius = 10
+        backgroundColor = .cellColor
+        
+
+        titleLabel.numberOfLines = 0
+        titleLabel.font = .systemFont(ofSize: 14, weight: .medium)
+        sourceLabel.numberOfLines = 0
+        sourceLabel.font = .systemFont(ofSize: 17, weight: .bold)
+        newsImageView.clipsToBounds = true
+        newsImageView.layer.cornerRadius = 10
+        newsImageView.contentMode = .scaleToFill
+        addSubview(sourceLabel)
+        addSubview(titleLabel)
+        addSubview(newsImageView)
+    }
+    
+    private func autoLayout() {
+        [sourceLabel, titleLabel, newsImageView].forEach { view in
+            view.translatesAutoresizingMaskIntoConstraints = false
+        }
+            NSLayoutConstraint.activate([
+                newsImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+                newsImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+                newsImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+                newsImageView.widthAnchor.constraint(equalToConstant: 100),
+                
+                sourceLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+                sourceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+                sourceLabel.trailingAnchor.constraint(equalTo: newsImageView.leadingAnchor, constant: -8),
+                
+                titleLabel.topAnchor.constraint(equalTo: sourceLabel.bottomAnchor, constant: 8),
+                titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+                titleLabel.trailingAnchor.constraint(equalTo: sourceLabel.trailingAnchor),
+                titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
+        ])
+    }
+    
 }

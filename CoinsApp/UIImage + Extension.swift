@@ -16,7 +16,15 @@ extension UIImageView {
                     DispatchQueue.main.async {
                         self.image = UIImage(data: data )
                     }
+                } else {
+                    DispatchQueue.main.async {
+                        self.image = nil
+                    }
                 }
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.image = nil
             }
         }
     }
