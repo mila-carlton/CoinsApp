@@ -98,6 +98,23 @@
 			children = (
 				656240092B60103F0021F12E /* AppDelegate.swift */,
 				6562400B2B60103F0021F12E /* SceneDelegate.swift */,
+				656717072B6FDEB800B88386 /* ViewControllers */,
+				65D5E9C82B62C58B0074DD54 /* Models */,
+				656240292B6030200021F12E /* NetworkRequest.swift */,
+				656716F12B640B6600B88386 /* WebService.swift */,
+				656240122B6010400021F12E /* Assets.xcassets */,
+				656240142B6010400021F12E /* LaunchScreen.storyboard */,
+				656240172B6010400021F12E /* Info.plist */,
+				656716EF2B64015E00B88386 /* Double + Extension.swift */,
+				656716ED2B63FD0F00B88386 /* UIImage + Extension.swift */,
+				656717012B6D41F900B88386 /* UIColor + Extension.swift */,
+			);
+			path = CoinsApp;
+			sourceTree = "<group>";
+		};
+		656717072B6FDEB800B88386 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
 				6562400D2B60103F0021F12E /* MainTabBarController.swift */,
 				6562401D2B6013290021F12E /* CoinsViewController.swift */,
 				6562402B2B6035DC0021F12E /* CoinViewCell.swift */,
@@ -105,22 +122,13 @@
 				656716F72B6ABDEA00B88386 /* MarketViewCell.swift */,
 				6562401F2B6013800021F12E /* ExchangesViewController.swift */,
 				656240212B6013920021F12E /* NewsViewController.swift */,
+				656716FF2B6C2A9300B88386 /* NewsCollectionViewCell.swift */,
 				656717032B6D5ACA00B88386 /* NewsDetailsViewController.swift */,
 				656717052B6D5C4F00B88386 /* DetailsTableViewCell.swift */,
-				656716FF2B6C2A9300B88386 /* NewsCollectionViewCell.swift */,
 				656240232B6013A50021F12E /* CurrenciesViewController.swift */,
 				656716FB2B6AF4CF00B88386 /* CurrencyCollectionViewCell.swift */,
-				65D5E9C82B62C58B0074DD54 /* Models */,
-				656240292B6030200021F12E /* NetworkRequest.swift */,
-				656240122B6010400021F12E /* Assets.xcassets */,
-				656240142B6010400021F12E /* LaunchScreen.storyboard */,
-				656240172B6010400021F12E /* Info.plist */,
-				656716EF2B64015E00B88386 /* Double + Extension.swift */,
-				656716ED2B63FD0F00B88386 /* UIImage + Extension.swift */,
-				656716F12B640B6600B88386 /* WebService.swift */,
-				656717012B6D41F900B88386 /* UIColor + Extension.swift */,
 			);
-			path = CoinsApp;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		65D5E9C82B62C58B0074DD54 /* Models */ = {

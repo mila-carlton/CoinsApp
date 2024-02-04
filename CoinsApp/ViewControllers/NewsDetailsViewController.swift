@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NewsDetailsViewController: UIViewController {
+final class NewsDetailsViewController: UIViewController {
     
     let tableView = UITableView()
     
@@ -25,9 +25,9 @@ class NewsDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        setupTableView()
+        autoLayout()
         view.backgroundColor = .customBackgroundColor
     }
-    
     
     private func setupTableView() {
         tableView.register(DetailsTableViewCell.self, forCellReuseIdentifier: DetailsTableViewCell.id)
@@ -35,16 +35,21 @@ class NewsDetailsViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.backgroundColor = .clear
         
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+    }
+    private func autoLayout() {
+        [tableView].forEach { view in
+            view.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
         ])
         tableView.delegate = self
         tableView.dataSource = self
-        
         
     }
 }
@@ -57,7 +62,7 @@ extension NewsDetailsViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DetailsTableViewCell.id, for: indexPath) as! DetailsTableViewCell
         cell.configure(newsItem: news)
-        
+        cell.sourceUrl = news.sourceLink
         return cell
     }
     
