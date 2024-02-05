@@ -13,8 +13,6 @@ extension UIColor {
         return UIColor(named: "marketCellColor")!
     }
     
-    
-    
     static var customBackgroundColor: UIColor {
         return UIColor(named: "customBackgroundCLR")!
     }

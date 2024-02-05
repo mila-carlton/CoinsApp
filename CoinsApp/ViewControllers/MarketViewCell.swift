@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MarketCollectionViewCell: UICollectionViewCell {
+final class MarketCollectionViewCell: UICollectionViewCell {
     
     static let id = "\(MarketCollectionViewCell.self)"
     

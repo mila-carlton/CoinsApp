@@ -20,8 +20,6 @@ final class NewsViewController: UIViewController {
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(NewsCollectionViewCell.self, forCellWithReuseIdentifier: NewsCollectionViewCell.id)
-    
-        
         
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -40,7 +38,6 @@ final class NewsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupView()
         fetchNews()
         

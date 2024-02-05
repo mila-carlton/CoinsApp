@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CoinViewCell: UITableViewCell {
+final class CoinViewCell: UITableViewCell {
     static let identifier = "\(CoinViewCell.self)"
     
     var logoImage = UIImageView()
@@ -44,12 +44,10 @@ class CoinViewCell: UITableViewCell {
             changeLabel.textColor = .red
         }
     }
-        
+    
     private func addSubviews() {
         backgroundColor = .clear
-        
         backView.layer.cornerRadius = 8
-        
         backView.backgroundColor = .cellColor
         
         contentView.addSubview(backView)
@@ -59,7 +57,6 @@ class CoinViewCell: UITableViewCell {
         backView.addSubview(abbreviationLabel)
         backView.addSubview(valueLabel)
         backView.addSubview(changeLabel)
-        
     }
     
     private func autoLayout() {
@@ -69,32 +66,32 @@ class CoinViewCell: UITableViewCell {
         [logoImage, nameLabel, abbreviationLabel, valueLabel, changeLabel, backView].forEach { view in
             view.translatesAutoresizingMaskIntoConstraints = false
         }
-            NSLayoutConstraint.activate([
-                logoImage.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 8),
-                logoImage.centerYAnchor.constraint(equalTo: backView.centerYAnchor),
-                logoImage.widthAnchor.constraint(equalToConstant: 32),
-                logoImage.heightAnchor.constraint(equalToConstant: 32),
-                
-                nameLabel.leadingAnchor.constraint(equalTo: logoImage.trailingAnchor, constant: 8),
-                nameLabel.topAnchor.constraint(equalTo: backView.topAnchor, constant: 8),
-                
-                abbreviationLabel.leadingAnchor.constraint(equalTo: logoImage.trailingAnchor, constant: 8),
-                abbreviationLabel.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -8),
-                
-                valueLabel.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -8),
-                valueLabel.topAnchor.constraint(equalTo: backView.topAnchor, constant: 8),
-                
-                changeLabel.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -8),
-                changeLabel.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -8),
-                
-                backView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
-                backView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6),
-                backView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-                backView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)
-                
-            ])
-        }
+        NSLayoutConstraint.activate([
+            logoImage.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 8),
+            logoImage.centerYAnchor.constraint(equalTo: backView.centerYAnchor),
+            logoImage.widthAnchor.constraint(equalToConstant: 32),
+            logoImage.heightAnchor.constraint(equalToConstant: 32),
+            
+            nameLabel.leadingAnchor.constraint(equalTo: logoImage.trailingAnchor, constant: 8),
+            nameLabel.topAnchor.constraint(equalTo: backView.topAnchor, constant: 8),
+            
+            abbreviationLabel.leadingAnchor.constraint(equalTo: logoImage.trailingAnchor, constant: 8),
+            abbreviationLabel.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -8),
+            
+            valueLabel.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -8),
+            valueLabel.topAnchor.constraint(equalTo: backView.topAnchor, constant: 8),
+            
+            changeLabel.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -8),
+            changeLabel.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -8),
+            
+            backView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
+            backView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6),
+            backView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            backView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)
+            
+        ])
     }
+}
 
 
 

@@ -77,6 +77,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6554DEC32B71427600343657 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				656716EF2B64015E00B88386 /* Double + Extension.swift */,
+				656716ED2B63FD0F00B88386 /* UIImage + Extension.swift */,
+				656717012B6D41F900B88386 /* UIColor + Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6554DEC42B7142A200343657 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				656240292B6030200021F12E /* NetworkRequest.swift */,
+				656716F12B640B6600B88386 /* WebService.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		65623FFD2B60103F0021F12E = {
 			isa = PBXGroup;
 			children = (
@@ -100,14 +119,11 @@
 				6562400B2B60103F0021F12E /* SceneDelegate.swift */,
 				656717072B6FDEB800B88386 /* ViewControllers */,
 				65D5E9C82B62C58B0074DD54 /* Models */,
-				656240292B6030200021F12E /* NetworkRequest.swift */,
-				656716F12B640B6600B88386 /* WebService.swift */,
+				6554DEC42B7142A200343657 /* Networking */,
+				6554DEC32B71427600343657 /* Extensions */,
 				656240122B6010400021F12E /* Assets.xcassets */,
 				656240142B6010400021F12E /* LaunchScreen.storyboard */,
 				656240172B6010400021F12E /* Info.plist */,
-				656716EF2B64015E00B88386 /* Double + Extension.swift */,
-				656716ED2B63FD0F00B88386 /* UIImage + Extension.swift */,
-				656717012B6D41F900B88386 /* UIColor + Extension.swift */,
 			);
 			path = CoinsApp;
 			sourceTree = "<group>";

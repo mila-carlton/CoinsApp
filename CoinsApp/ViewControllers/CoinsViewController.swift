@@ -7,11 +7,11 @@
 
 import UIKit
 
-class CoinsViewController: UIViewController {
+final class CoinsViewController: UIViewController {
     
-
-let tableView = UITableView()
-
+    
+    let tableView = UITableView()
+    
     private var coins: [Coin] = []
     
     private let webService = WebService()
@@ -20,7 +20,7 @@ let tableView = UITableView()
         super.viewDidLoad()
         title = "Coins"
         setupTableView()
-        view.backgroundColor = .customBackgroundColor//UIColor(red: 237/255, green: 237/255, blue: 238/255, alpha: 1.0)
+        view.backgroundColor = .customBackgroundColor
         fetchCoins()
     }
     
@@ -67,9 +67,9 @@ extension CoinsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCoin = coins[indexPath.row]
+        tableView.deselectRow(at: indexPath, animated: true)
         let marketVC = MarketViewController()
         marketVC.selectedCoin = selectedCoin
         navigationController?.show(marketVC, sender: self)
     }
-    
 }

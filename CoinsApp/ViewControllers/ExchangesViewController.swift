@@ -12,22 +12,18 @@ final class ExchangesViewController: UIViewController {
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     var exchs: [Exchange] = []
-
+    private let webService = WebService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        
+        view.backgroundColor = .customBackgroundColor
         setupCollectionView()
-       
         fetchExch()
     }
     
-    private let webService = WebService()
-    
     func setupCollectionView() {
-        navigationController?.navigationBar.barTintColor = .black
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        collectionView.backgroundColor = .black
+        collectionView.backgroundColor = .clear
         title = "Exchanges"
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -55,9 +51,8 @@ final class ExchangesViewController: UIViewController {
             
         }
     }
-
 }
- 
+
 extension ExchangesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         exchs.count
@@ -65,14 +60,15 @@ extension ExchangesViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        cell.backgroundColor = .cellColor
         let exchange = exchs[indexPath.row]
         cell.contentView.subviews.forEach { $0.removeFromSuperview() }
         let label = UILabel(frame: cell.bounds)
         label.text = "  " + (exchange.name ?? "")
         label.textAlignment = .left
-        label.textColor = .white
+        
         cell.contentView.addSubview(label)
-        cell.backgroundColor = UIColor(red: 34/255, green: 34/255, blue: 36/255, alpha: 1)
+        cell.backgroundColor = .cellColor
         cell.layer.cornerRadius = 10
         return cell
     }

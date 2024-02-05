@@ -37,7 +37,6 @@ final class NewsCollectionViewCell: UICollectionViewCell {
         layer.cornerRadius = 10
         backgroundColor = .cellColor
         
-
         titleLabel.numberOfLines = 0
         titleLabel.font = .systemFont(ofSize: 14, weight: .medium)
         sourceLabel.numberOfLines = 0
@@ -54,20 +53,20 @@ final class NewsCollectionViewCell: UICollectionViewCell {
         [sourceLabel, titleLabel, newsImageView].forEach { view in
             view.translatesAutoresizingMaskIntoConstraints = false
         }
-            NSLayoutConstraint.activate([
-                newsImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-                newsImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-                newsImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
-                newsImageView.widthAnchor.constraint(equalToConstant: 100),
-                
-                sourceLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-                sourceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-                sourceLabel.trailingAnchor.constraint(equalTo: newsImageView.leadingAnchor, constant: -8),
-                
-                titleLabel.topAnchor.constraint(equalTo: sourceLabel.bottomAnchor, constant: 8),
-                titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-                titleLabel.trailingAnchor.constraint(equalTo: sourceLabel.trailingAnchor),
-                titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
+        NSLayoutConstraint.activate([
+            newsImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            newsImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            newsImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+            newsImageView.widthAnchor.constraint(equalToConstant: 100),
+            
+            sourceLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            sourceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            sourceLabel.trailingAnchor.constraint(equalTo: newsImageView.leadingAnchor, constant: -8),
+            
+            titleLabel.topAnchor.constraint(equalTo: sourceLabel.bottomAnchor, constant: 8),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            titleLabel.trailingAnchor.constraint(equalTo: sourceLabel.trailingAnchor),
+            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
         ])
     }
     

@@ -8,7 +8,7 @@
 import UIKit
 
 final class CurrencyViewController: UIViewController {
-
+    
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     var currency: [Currency] = []
@@ -17,6 +17,7 @@ final class CurrencyViewController: UIViewController {
     lazy var currencyCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
+        title = "Currencies"
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         collectionView.showsVerticalScrollIndicator = false
@@ -24,6 +25,7 @@ final class CurrencyViewController: UIViewController {
         
         collectionView.dataSource = self
         collectionView.delegate = self
+        
         collectionView.backgroundColor = .clear
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -39,14 +41,7 @@ final class CurrencyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .customBackgroundColor
-        setupCollectionView()
         fetchCurrency()
-    }
-    
-    func setupCollectionView() {
-        navigationController?.navigationBar.barTintColor = .black
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-                title = "Currencies"
     }
     
     private func fetchCurrency() {

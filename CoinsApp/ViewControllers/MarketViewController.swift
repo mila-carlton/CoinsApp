@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 final class MarketViewController: UIViewController {
     
     var selectedCoin: Coin?
@@ -58,27 +57,27 @@ final class MarketViewController: UIViewController {
     }
 }
 
-    extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-        
-        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            markets.count
-        }
-
-        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MarketCollectionViewCell.id, for: indexPath) as? MarketCollectionViewCell else { return UICollectionViewCell() }
-            let market = markets[indexPath.item]
-            cell.configure(market: market)
-            return cell
-        }
-        
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            let screenWidth = UIScreen.main.bounds.width
-            let width = (screenWidth - 30) / 2
-            let height: CGFloat = 140
-            return CGSize(width: width, height: height)
-        }
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-            10
-        }
+extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        markets.count
     }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MarketCollectionViewCell.id, for: indexPath) as? MarketCollectionViewCell else { return UICollectionViewCell() }
+        let market = markets[indexPath.item]
+        cell.configure(market: market)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let screenWidth = UIScreen.main.bounds.width
+        let width = (screenWidth - 30) / 2
+        let height: CGFloat = 140
+        return CGSize(width: width, height: height)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        10
+    }
+}
 
